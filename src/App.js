@@ -38,9 +38,11 @@ function App() {
 
       {/*3. List of players (unordered list with list players)*/}
       <ul>
-        <li>rolando</li>
-        <li>rolando</li>
-        <li>rolando</li>
+        {items.map(item => {
+          return(
+            <li key={item.id}>{item.value}</li>
+          )
+        })}
       </ul>
       
     </div>
