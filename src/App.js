@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 
 function App() {
   // state hook - 'useState
   const [newItem, setNewItem] = useState("");
   const [items, setItems] = useState([]);
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
 
   // helper function
   function addItem() {
@@ -12,14 +13,23 @@ function App() {
       alert("Enter a player name.")
     }
 
+    
+
     const item = {
       id: Math.floor(Math.random() * 1000),
       value: newItem
     };
 
-    setItems(oldList => [...oldList, item]); //
-    setNewItem("")
+    setItems(oldList => [...oldList, item]); //add a player to the list
+    setNewItem("") // clear input box
   }
+  useEffect(() => {
+      if (newItem === '') {
+        setIsButtonDisabled(true);
+      } else {
+        setIsButtonDisabled(false);
+      }
+    }, [newItem]);
 
   function deleteItem(id){
     const newArray = items.filter(item => item.id !== id);
@@ -39,7 +49,7 @@ function App() {
         value={newItem}
         onChange={e => setNewItem(e.target.value)}
       />
-      <button onClick={() => addItem()}>Add</button>
+      <button disabled={isButtonDisabled} onClick={() => addItem()}>Add</button>
 
       {/*3. List of players (unordered list with list players)*/}
       <ul>
