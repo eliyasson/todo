@@ -12,9 +12,6 @@ function App() {
     if(!newItem) {
       alert("Enter a player name.")
     }
-
-    
-
     const item = {
       id: Math.floor(Math.random() * 1000),
       value: newItem
@@ -39,26 +36,27 @@ function App() {
 
   return (
     <div className="App">
-      {/*1. Header */}
-      <h1>Todo List App</h1>
+      <h1>Add Player List App</h1>
 
-      {/*2.Input (input and button)*/} 
-      <input
+      <div className='btn'>
+        <input
         type="text"
-        placeholder='Add an item...'
+        placeholder='Add player'
         value={newItem}
         onChange={e => setNewItem(e.target.value)}
-      />
-      <button disabled={isButtonDisabled} onClick={() => addItem()}>Add</button>
+        />
+        <button disabled={isButtonDisabled} onClick={() => addItem()}>Add Player</button>
+      </div>
+      
 
       {/*3. List of players (unordered list with list players)*/}
-      <ul>
+      <ol>
         {items.map(item => {
           return(
-            <li key={item.id}>{item.value} <button className='delete-button' onClick = {() => deleteItem(item.id)}>❌</button></li>
+            <li key={item.id}>{item.value} <button className='delete-button' onClick = {() => deleteItem(item.id)}>Delete</button></li>
           )
         })}
-      </ul>
+      </ol>
       
     </div>
   );
