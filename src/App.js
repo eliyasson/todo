@@ -9,9 +9,6 @@ function App() {
 
   // helper function
   function addItem() {
-    if(!newItem) {
-      alert("Enter a player name.")
-    }
     const item = {
       id: Math.floor(Math.random() * 1000),
       value: newItem
