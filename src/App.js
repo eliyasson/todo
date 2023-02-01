@@ -17,9 +17,12 @@ function App() {
       value: newItem
     };
 
-    setItems(oldList => [...oldList, item]);
+    setItems(oldList => [...oldList, item]); //
     setNewItem("")
-    console.log(items);
+  }
+
+  function deleteItem(id){
+
   }
 
   return (
@@ -40,7 +43,7 @@ function App() {
       <ul>
         {items.map(item => {
           return(
-            <li key={item.id}>{item.value}</li>
+            <li key={item.id}>{item.value} <button onClick = {() => deleteItem(item.id)}>❌</button></li>
           )
         })}
       </ul>
