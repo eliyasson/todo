@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
+import TodoList from './TodoList';
+import AddTodo from './AddTodo';
+ 
 
 function App() {
   // state hook - 'useState
@@ -15,46 +18,27 @@ function App() {
     };
 
     setItems(oldList => [...oldList, item]); //add a player to the list
-    setNewItem("") // clear input box
+    setNewItem(""); // clear input box
   }
-  useEffect(() => {
-      if (newItem === '') {
-        setIsButtonDisabled(true);
-      } else {
-        setIsButtonDisabled(false);
-      }
-    }, [newItem]);
 
-  function deleteItem(id){
+  useEffect(() => {
+    if (newItem === '') {
+      setIsButtonDisabled(true);
+    } else {
+      setIsButtonDisabled(false);
+    }
+  }, [newItem]);
+
+  function deleteItem(id) {
     const newArray = items.filter(item => item.id !== id);
     setItems(newArray);
-
   }
 
   return (
     <div className="App">
       <h1>Add Player List App</h1>
-
-      <div className='btn'>
-        <input
-        type="text"
-        placeholder='Add player'
-        value={newItem}
-        onChange={e => setNewItem(e.target.value)}
-        />
-        <button disabled={isButtonDisabled} onClick={() => addItem()}>Add Player</button>
-      </div>
-      
-
-      {/*3. List of players (unordered list with list players)*/}
-      <ol>
-        {items.map(item => {
-          return(
-            <li key={item.id}>{item.value} <button className='delete-button' onClick = {() => deleteItem(item.id)}>Delete</button></li>
-          )
-        })}
-      </ol>
-      
+      <AddTodo newItem={newItem} setNewItem={setNewItem} isButtonDisabled={isButtonDisabled} addItem={addItem} />
+      <TodoList items={items} deleteItem={deleteItem} />
     </div>
   );
 }
